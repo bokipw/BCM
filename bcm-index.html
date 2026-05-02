@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCM Mining Rewards</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --red:#e63946; --red-dark:#c1121f; --gold:#ffd60a;
+  --bg:#0a0a0f; --surface:#12121a; --surface2:#1a1a26;
+  --border:#2a2a3a; --text:#e8e8f0; --text-dim:#7a7a9a;
+  --green:#50c878;
+}
+body { font-family:'Rajdhani',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; }
+body::before { content:''; position:fixed; inset:0; background-image:linear-gradient(rgba(230,57,70,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(230,57,70,0.03) 1px,transparent 1px); background-size:40px 40px; pointer-events:none; }
+.orb { position:fixed; border-radius:50%; filter:blur(80px); pointer-events:none; }
+.orb1 { width:400px; height:400px; background:rgba(230,57,70,0.07); top:-100px; left:-100px; animation:float1 8s ease-in-out infinite; }
+.orb2 { width:300px; height:300px; background:rgba(255,214,10,0.05); bottom:-50px; right:-50px; animation:float2 10s ease-in-out infinite; }
+@keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,30px)} }
+@keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,-20px)} }
+
+.container { position:relative; z-index:10; width:100%; max-width:460px; padding:20px; }
+
+.logo-wrap { text-align:center; margin-bottom:40px; animation:fadeDown 0.6s ease both; }
+.logo-icon { font-size:3rem; margin-bottom:12px; }
+.logo-title { font-family:'Orbitron',monospace; font-size:1.4rem; font-weight:900; letter-spacing:4px; background:linear-gradient(135deg,var(--red),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.logo-sub { font-size:0.8rem; color:var(--text-dim); letter-spacing:3px; margin-top:4px; }
+
+.card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:40px; position:relative; overflow:hidden; animation:fadeUp 0.6s ease 0.2s both; }
+.card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--red),var(--gold),transparent); }
+
+.card-title { font-family:'Orbitron',monospace; font-size:0.8rem; letter-spacing:3px; color:var(--text-dim); text-align:center; margin-bottom:6px; }
+.card-sub { font-size:0.82rem; color:var(--text-dim); text-align:center; margin-bottom:28px; }
+.admin-badge { display:inline-block; background:rgba(255,214,10,0.1); border:1px solid rgba(255,214,10,0.3); color:var(--gold); font-family:'Orbitron',monospace; font-size:0.6rem; letter-spacing:2px; padding:3px 10px; border-radius:20px; margin-bottom:20px; }
+
+.ilabel { display:block; font-size:0.75rem; letter-spacing:2px; color:var(--text-dim); margin-bottom:8px; font-family:'Orbitron',monospace; }
+.iwrap { position:relative; margin-bottom:16px; }
+.iwrap::before { content:'@'; position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--red); font-family:'Orbitron',monospace; }
+.inp { width:100%; background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:13px 14px 13px 36px; color:var(--text); font-family:'Rajdhani',sans-serif; font-size:1rem; outline:none; transition:border-color 0.2s; }
+.inp:focus { border-color:var(--red); }
+.inp::placeholder { color:var(--text-dim); }
+
+.btnp { width:100%; padding:14px; background:linear-gradient(135deg,var(--red-dark),var(--red)); border:none; border-radius:8px; color:white; font-family:'Orbitron',monospace; font-size:0.8rem; font-weight:700; letter-spacing:3px; cursor:pointer; transition:all 0.2s; }
+.btnp:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(230,57,70,0.4); }
+.btnp:disabled { opacity:0.5; cursor:not-allowed; transform:none; box-shadow:none; }
+
+.lmsg { margin-top:12px; padding:10px 14px; border-radius:8px; font-size:0.85rem; display:none; }
+.lmsg.err { display:block; background:rgba(230,57,70,0.1); border:1px solid rgba(230,57,70,0.3); color:#ff6b78; }
+.lmsg.info { display:block; background:rgba(255,214,10,0.08); border:1px solid rgba(255,214,10,0.2); color:var(--gold); }
+
+@keyframes fadeDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="container">
+  <div class="logo-wrap">
+    <div class="logo-icon">⛏️</div>
+    <div class="logo-title">BCM Mining Rewards</div>
+    <div class="logo-sub">Admin Dashboard</div>
+  </div>
+
+  <div class="card">
+    <div style="text-align:center;margin-bottom:16px;"><span class="admin-badge">⚡ ADMIN ONLY</span></div>
+    <div class="card-title">Secure Access</div>
+    <div class="card-sub">Only @bokica80 can enter</div>
+    <label class="ilabel">Hive Username</label>
+    <div class="iwrap">
+      <input class="inp" type="text" id="unameInput" placeholder="bokica80" autocomplete="off"/>
+    </div>
+    <button class="btnp" id="loginBtn" onclick="doLogin()">Login with Keychain</button>
+    <div class="lmsg" id="lmsg"></div>
+  </div>
+</div>
+
+<script>
+var ADMIN = 'bokica80';
+
+window.onload = function() {
+  var saved = sessionStorage.getItem('bcm_admin');
+  if (saved === ADMIN) window.location.href = 'mining.html';
+};
+
+document.getElementById('unameInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') doLogin();
+});
+
+function showMsg(msg, type) {
+  var el = document.getElementById('lmsg');
+  el.textContent = msg;
+  el.className = 'lmsg ' + type;
+}
+
+function doLogin() {
+  var uname = document.getElementById('unameInput').value.trim().toLowerCase();
+  if (!uname) { showMsg('Enter your username.', 'err'); return; }
+  if (uname !== ADMIN) { showMsg('Access denied.', 'err'); return; }
+  if (typeof window.hive_keychain === 'undefined') { showMsg('Hive Keychain not detected.', 'err'); return; }
+  var btn = document.getElementById('loginBtn');
+  btn.disabled = true;
+  btn.textContent = 'Connecting...';
+  showMsg('Waiting for Keychain...', 'info');
+  window.hive_keychain.requestSignBuffer(uname, 'BCM Mining Login ' + Date.now(), 'Posting', function(res) {
+    btn.disabled = false;
+    btn.textContent = 'Login with Keychain';
+    if (res.success) {
+      sessionStorage.setItem('bcm_admin', uname);
+      window.location.href = 'mining.html';
+    } else {
+      showMsg(res.message || 'Login failed.', 'err');
+    }
+  });
+}
+</script>
+</body>
+</html>
